@@ -1,0 +1,37 @@
+{
+    "bridge": {
+        "name": "Homebridge",
+        "username": "CC:22:3D:E3:CE:30",
+        "port": 51826,
+        "pin": "031-45-154"
+    },
+    "platforms": [
+        {
+            "platform": "Cmd4",
+            "name": "Cmd4",
+            "accessories": [
+                {
+                    "type": "Thermostat",
+                    "name": "Aircon",
+                    "currentHeatingCoolingState": 0,
+                    "targetHeatingCoolingState": 0,
+                    "currentTemperature": 0,
+                    "targetTemperature": 25,
+                    "temperatureDisplayUnits": 0,
+                    "timeout": 1000,
+                    "polling": false,
+                    "interval": 300,
+                    "TargetTemperature ": 25,
+                    "stateChangeResponseTime": 1,
+                    "state_cmd": "bash .homebridge/Cmd4Scripts/BRP15B61.sh"
+                },
+                {
+                    "type": "Fan",
+                    "name": "Fan",
+                    "stateChangeResponseTime": 1,
+                    "state_cmd": "bash .homebridge/Cmd4Scripts/BRP15B61.sh"
+                }
+            ]
+        }
+    ]
+}
