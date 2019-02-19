@@ -16,10 +16,5 @@ Fan mode can be configured as a separate Fan HomeKit device
 Turning Fan On from HomeKit will turn Off Thermostat and vice versa
 
 You can test the script from he command line, use any accessory name, it's not used in the script:
-
-bash BRP15B61.sh Get < Accessory Name > < Characteristic >
-bash BRP15B61.sh Set < Accessory Name > < Characteristic > < Value >
-
-E.g.
 bash BRP15B61.sh Get Daikin CurrentTemperature
 bash BRP15B61.sh Set Daikin TargetHeatingCoolingState 0
