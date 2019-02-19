@@ -19,8 +19,6 @@
                     "targetTemperature": 25,
                     "temperatureDisplayUnits": 0,
                     "timeout": 3000,
-                    "polling": false,
-                    "interval": 300,
                     "stateChangeResponseTime": 1,
                     "state_cmd": "bash .homebridge/Cmd4Scripts/BRP15B61.sh"
                 },
@@ -28,8 +26,6 @@
                     "type": "Fan",
                     "name": "Fan",
                     "timeout": 3000,
-                    "polling": false,
-                    "interval": 310,
                     "stateChangeResponseTime": 1,
                     "state_cmd": "bash .homebridge/Cmd4Scripts/BRP15B61.sh"
                 }
