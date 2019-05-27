@@ -63,7 +63,8 @@ if [ "$1" = "Get" ]; then
       else
         case "$mode" in
           #Fan On = Cool/Heat Off
-          0 )
+          #Dry mode is not supported by HomeKit so report as Off
+          0|7 )
           echo 0
           exit 0
           ;;
