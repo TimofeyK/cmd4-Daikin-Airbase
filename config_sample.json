@@ -12,23 +12,29 @@
             "accessories": [
                 {
                     "type": "Thermostat",
+                    "currentHeatingCoolingState": "OFF",
+                    "targetHeatingCoolingState": "OFF",
+                    "currentTemperature": 10,
+                    "targetTemperature": 10,
+                    "temperatureDisplayUnits": "CELSIUS",
                     "name": "Aircon",
-                    "currentHeatingCoolingState": 0,
-                    "targetHeatingCoolingState": 0,
-                    "currentTemperature": 0,
-                    "targetTemperature": 25,
-                    "temperatureDisplayUnits": 0,
-                    "timeout": 3000,
+                    "polling": [
+                        {
+                            "currentHeatingCoolingState": "OFF",
+                            "interval": 100,
+                            "timeout": 3000
+                        }
+                    ],
                     "stateChangeResponseTime": 1,
-                    "state_cmd": "bash .homebridge/Cmd4Scripts/BRP15B61.sh"
+                    "state_cmd": "bash /home/pi/Cmd4Scripts/BRP15B61.sh"
                 },
                 {
                     "type": "Fan",
+                    "on": "FALSE",
                     "name": "Fan",
-                    "timeout": 3000,
                     "stateChangeResponseTime": 1,
-                    "state_cmd": "bash .homebridge/Cmd4Scripts/BRP15B61.sh"
-                }
+                    "state_cmd": "bash /home/pi/Cmd4Scripts/BRP15B61.sh"
+                },
             ]
         }
     ]
