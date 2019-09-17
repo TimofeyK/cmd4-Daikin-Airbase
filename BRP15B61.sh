@@ -6,10 +6,10 @@ htemp=0
 stemp=0
 pow=0
 mode=0
+SECONDS=0
 
 #Reading sensor info to get the current temperature (htemp)
 function readSensorInfo {
-
   local response=$(curl -s http://$baseip/skyfi/aircon/get_sensor_info)
 
   if [[ $response =~ htemp=([0-9]{2}) ]];
@@ -38,45 +38,42 @@ function readControlInfo {
   fi
 }
 
+function writeLog {
+    echo -e "$(date +"%F %T.%N")\t$1\t$2\t$3\t$4\t$result\t$SECONDS" >> Cmd4.log
+}
+
 if [ "$1" = "Get" ]; then
   case "$3" in
     CurrentTemperature )
       readSensorInfo
-      echo "$htemp"
-      exit 0
+      result="$htemp"
       ;;
     TargetTemperature )
       readControlInfo
-      echo "$stemp"
-      exit 0
+      result="$stemp"
       ;;
     TemperatureDisplayUnits )
       # Celsius
-      echo 0
-      exit 0
+      result=0
       ;;
     CurrentHeatingCoolingState|TargetHeatingCoolingState )
       readControlInfo
       if [ "$pow" = "0" ]; then
-        echo 0
-        exit
+        result=0
       else
         case "$mode" in
           #Fan On = Cool/Heat Off
           #Dry mode is not supported by HomeKit so report as Off
           0|7 )
-          echo 0
-          exit 0
+          result=0
           ;;
           #Heat On
           1 )
-          echo 1
-          exit 0
+          result=1
           ;;
           #Cool On
           2 )
-          echo 2
-          exit 0
+          result=2
         esac
       fi
       ;;
@@ -84,14 +81,16 @@ if [ "$1" = "Get" ]; then
     On )
       readControlInfo
       if [ "$pow" = "1" ] && [ "$mode" = "0" ]; then
-        echo 1
-        exit 0
+        result=1
       else
-        echo 0
-        exit 0
+        result=0
       fi
       ;;
   esac
+
+  writeLog $1 $2 $3 $4
+  echo "$result"
+  exit 0
 fi
 
 if [ "$1" = "Set" ]; then
@@ -128,7 +127,9 @@ if [ "$1" = "Set" ]; then
   esac
 
   curl -s "http://$baseip/skyfi/aircon/set_control_info?pow=$pow&mode=$mode&stemp=$stemp&f_airside=0&f_rate=5&shum=0&f_dir=0"
-  exit $?
+  result=$?
+  writeLog $1 $2 $3 $4
+  exit $result
 fi
 
 exit 1
