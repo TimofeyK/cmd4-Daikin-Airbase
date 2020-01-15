@@ -39,7 +39,7 @@ function readControlInfo {
 }
 
 function writeLog {
-    echo -e "$(date +"%F %T.%N")\t$1\t$2\t$3\t$4\t$result\t$SECONDS" >> Cmd4.log
+    echo -e "$(date +"%F %T.%N")\t$1\t$2\t$3\t$4\t$result\t$SECONDS" >> $HOME/Cmd4.log
 }
 
 if [ "$1" = "Get" ]; then
