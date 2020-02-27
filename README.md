@@ -1,3 +1,5 @@
+This solution is no longer needed as there is an excellent https://github.com/yenoiwesa/homebridge-daikin-airbase plugin for Daikin BRP15B61 Airbase controller
+
 # cmd4-Daikin-Airbase
 Shell script to integrate Daikin BRP15B61 Airbase controller with Homebridge using cmd4 plugin
 
